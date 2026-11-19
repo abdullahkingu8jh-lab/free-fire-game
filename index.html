@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Battle Game</title>
+<style>
+body {
+  background: #202b20;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+canvas {
+  background: #547b42;
+  border: 3px solid white;
+  width: 95%;
+  max-width: 400px;
+}
+button {
+  padding: 15px;
+  margin: 5px;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<h2>🔥 MY BATTLE GAME 🔥</h2>
+<p>Move your player and collect points!</p>
+<h3>Score: <span id="score">0</span></h3>
+<canvas id="game" width="350" height="450"></canvas>
+<br>
+<button onclick="move(-20,0)">⬅️</button>
+<button onclick="move(0,-20)">⬆️</button>
+<button onclick="move(0,20)">⬇️</button>
+<button onclick="move(20,0)">➡️</button>
+<script>
+const c = document.getElementById("game");
+const ctx = c.getContext("2d");
+let x=175, y=225, score=0;
+let coin={x:80,y:80};
+function draw(){
+ctx.clearRect(0,0,350,450);
+ctx.fillStyle="blue";
+ctx.fillRect(x-12,y-12,24,24);
+ctx.fillStyle="gold";
+ctx.beginPath();
+ctx.arc(coin.x,coin.y,10,0,Math.PI*2);
+ctx.fill();
+}
+function move(dx,dy){
+x=Math.max(12,Math.min(338,x+dx));
+y=Math.max(12,Math.min(438,y+dy));
+if(Math.abs(x-coin.x)<20 && Math.abs(y-coin.y)<20){
+score++;
+document.getElementById("score").textContent=score;
+coin={x:20+Math.random()*310,y:20+Math.random()*410};
+}
+draw();
+}
+draw();
+</script>
+</body>
+  </html>
+  
